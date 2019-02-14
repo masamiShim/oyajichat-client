@@ -12,7 +12,11 @@ const state = {
   menu: {
     showSidebar: false,
   },
-}
+  user: {},
+  members: [],
+  rooms: [],
+  messages: [],
+};
 
 export default new Vuex.Store({
   state,

@@ -1,6 +1,6 @@
 <template>
   <footer class="c-footer">
-    <form action="" @submit.prevent = "doSend" class="c-form-message">
+    <form action="" @submit.prevent="doSend" class="c-form-message">
           <textarea
             class="input-text-form"
             v-model="input"
@@ -10,7 +10,8 @@
       <button class="c-btn-send"
               type="submit"
               :disabled="!uid"
-      >Send</button>
+      >Send
+      </button>
     </form>
   </footer>
 </template>
@@ -55,7 +56,7 @@ export default {
   }
 
   .input-text-form {
-    width:  100%;
+    width: 100%;
     height: 100%;
     padding: 1em .2em .2em 1em;
     font-size: 1em;
@@ -63,11 +64,13 @@ export default {
     resize: none;
     overflow: hidden;
   }
+
   .c-form-message {
     display: inline-flex;
     align-items: center;
     width: 100%;
   }
+
   .c-btn-send {
     border: none;
     background-color: #565656;

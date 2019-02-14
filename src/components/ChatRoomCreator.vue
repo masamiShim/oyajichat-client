@@ -15,7 +15,7 @@
     <ChatRoomFriendsList
       :selected="selected"
       :filteredMembers="filteredMembers"
-      @selected="doSelect" />
+      @selected="doSelect"/>
     <ChatRoomRoomList
       :rooms="rooms"
     />
@@ -57,8 +57,8 @@ export default {
   methods: {
     doCreate() {
       if (this.user.uid
-        && this.roomName
-        && this.selected.length > 0) {
+          && this.roomName
+          && this.selected.length > 0) {
         db.collection('room')
           .add({
             name: this.roomName,
@@ -114,8 +114,7 @@ export default {
                 this.rooms.push(doc.data());
               });
             })
-            .catch((error) => {
-              console.error(error);
+            .catch(() => {
             })
             .on('child_added', this.childAdded);
 
@@ -139,10 +138,11 @@ export default {
 </script>
 
 <style scoped>
-.success-message-enter-active, .success-message-leave-active {
-  transition: opacity .5s;
-}
-.success-message-enter, .success-message-leave {
-  opacity: 0;
-}
+  .success-message-enter-active, .success-message-leave-active {
+    transition: opacity .5s;
+  }
+
+  .success-message-enter, .success-message-leave {
+    opacity: 0;
+  }
 </style>

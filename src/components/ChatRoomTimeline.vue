@@ -34,7 +34,7 @@ export default {
   }
 
   .c-chat-label {
-    position:relative;
+    position: relative;
     top: 50px;
   }
 
@@ -62,7 +62,6 @@ export default {
     margin-left: auto;
     background-color: lightcyan;
   }
-
 
   .c-my-chat__label {
     text-align: left;

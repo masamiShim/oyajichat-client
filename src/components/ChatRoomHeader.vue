@@ -3,7 +3,7 @@
     <div class="c-header-wrapper">
       <div class="c-app-name">Oyaji-Chat</div>
       <div class="c-login-control">
-        <div v-if="uid" key="login">
+        <div v-if="!user" key="login">
           <button class="btn-login" type="button" @click="doLogout">ログアウト</button>
         </div>
         <div v-else key="logout">
@@ -15,16 +15,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ChatRoomHeader',
-  props: {
-    uid: {
-      type: String,
-    },
-    userName: {
-      type: String,
-    },
-  },
+  computed: mapState({
+    user: state => state.user,
+  }),
   methods: {
     doLogout() {
       this.$emit('logout');
@@ -37,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-  .c-header{
+  .c-header {
     color: white;
     display: flex;
     justify-content: space-between;
@@ -46,17 +43,18 @@ export default {
     height: 80px;
     box-sizing: border-box;
   }
+
   .c-header-wrapper {
     width: 50%;
     margin: 0 auto;
   }
 
-  .c-app-name{
+  .c-app-name {
     width: 100%;
     text-align: left;
   }
 
-  .c-login-control{
+  .c-login-control {
     text-align: right;
   }
 
@@ -67,6 +65,7 @@ export default {
     border-radius: 15px;
     color: #efefef;
   }
+
   .btn-logout {
     border: none;
     background-color: #565656;

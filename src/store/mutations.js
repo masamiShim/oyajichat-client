@@ -10,4 +10,13 @@ export default {
   [types.FETCH_MESSAGES](state, messages) {
     state.messages = messages;
   },
+  [types.FETCH_MEMBERS](state, members) {
+    state.members = members;
+  },
+  [types.STORE_USER](state, user) {
+    state.user = user;
+  },
+  [types.REMOVE_USER](state) {
+    state.user = {};
+  },
 };

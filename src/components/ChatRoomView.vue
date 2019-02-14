@@ -9,7 +9,7 @@
 <script>
 
 import firebase from 'firebase';
-import db from '@/firebaseInit';
+// import db from '@/firebaseInit';
 import ChatRoomFooter from '@/components/ChatRoomFooter';
 import ChatRoomTimeline from '@/components/ChatRoomTimeline';
 
@@ -33,9 +33,10 @@ export default {
           this.$store.dispatch('fetchMessage');
         } else {
           // message変更時のハンドラを解除
-          db.collection('message')
-            .limitToLast(10)
+          /*          db.collection('message')
+            .limitToLast(10);
             .on('child_added', this.childAdded);
+            */
         }
       });
   },
@@ -45,29 +46,18 @@ export default {
         window.scrollTo(0, document.body.clientHeight);
       });
     },
-    childAdd(snap) {
-      const message = snap.val();
-      this.chat.push({
-        key: snap.key,
-        name: message.name,
-        image: message.image,
-        message: message.message,
-      });
+    childAdd() {
+      this.$store.dispatch('fetchMessage');
       this.scrollBottom();
     },
     doSend(payload) {
       if (this.user.uid) {
-        db.collection('message')
-          .add({
-            message: payload,
-            name: this.user.displayName,
-            image: this.user.photoURL,
-          })
-          .then(() => {
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        const sender = {
+          message: payload,
+          name: this.user.displayName,
+          image: this.user.photoURL,
+        };
+        this.$store.dispatch('sendMessage', sender);
       }
     },
   },

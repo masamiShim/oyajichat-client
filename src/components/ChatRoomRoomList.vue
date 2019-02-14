@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ChatRoomRoomList',
   props: {
@@ -21,6 +23,11 @@ export default {
       type: Array,
     },
   },
+  computed: mapState({
+    rooms: state => state.rooms,
+  }),
+
+
 };
 </script>
 

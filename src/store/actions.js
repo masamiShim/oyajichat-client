@@ -5,15 +5,16 @@ export default {
     commit(types.TOGGLE_SIDEBAR, !state.showSidebar);
   },
   fetchRooms: ({ commit }) => {
-    // FIXME: API
+    // FIXME: FireStorage
     const rooms = [{
+      id: 'room1',
       host: 'freitech',
       members: ['user1', 'user2'],
     }];
     commit(types.FETCH_ROOMS, rooms);
   },
   fetchMessage: ({ commit }) => {
-    // FIXME: API
+    // FIXME: FireStorage
     const messages = [{
       name: 'freitech',
       message: 'hogehogefuga',
@@ -23,5 +24,20 @@ export default {
       message: 'functionalHoge!!!!!',
     }];
     commit(types.FETCH_MESSAGES, messages);
+  },
+  sendMessage: ({ commit, payload }) => {
+    const message = {
+      key: payload.key,
+      name: payload.name,
+      image: payload.image,
+      message: payload.message,
+    };
+    commit(types.SEND_MESSAGE, message);
+  },
+  storeUser: ({ commit, payload }) => {
+    commit(types.STORE_USER, payload);
+  },
+  removeUser: ({ commit }) => {
+    commit(types.REMOVE_USER);
   },
 };
