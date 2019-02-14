@@ -1,13 +1,29 @@
 <template>
   <div id="app">
+    <ChatRoomHeader :uid="user.uid"
+                    :userName="user.displayName"
+                    @login="doLogin"
+                    @logout="doLogout"/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase';
 
 export default {
   name: 'App',
+  methods: {
+    doLogin() {
+      const provider = new firebase.auth.TwitterAuthProvider();
+      firebase.auth()
+        .signInWithPopup(provider);
+    },
+    doLogout() {
+      firebase.auth()
+        .signOut();
+    },
+  },
 };
 </script>
 

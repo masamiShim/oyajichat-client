@@ -12,39 +12,25 @@
       <label>お友達</label>
       <input type="text" v-model="memberName">
     </div>
-    <div v-show="selected.length < 1">お友達選んで</div>
-    <div v-if="filteredMembers.length > 0">
-    <ul>
-      <li v-for="member in filteredMembers" :key="member.id">
-        <input :id="member.name" type="checkbox"
-               :checked="selected.indexOf(member.name) > 0"
-               @click="doSelect(member.name)">
-        <label :for="member.name">{{ member.name }}</label>
-      </li>
-    </ul>
-    </div>
-    <div v-else>
-      そんな友達いーひんよ
-    </div>
-    <div v-if="rooms.length > 0">
-      <ul>
-        <li v-for="room in rooms" :key="room.id">
-          {{ room.name }}
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      お部屋Nothing
-    </div>
+    <ChatRoomFriendsList
+      :selected="selected"
+      :filteredMembers="filteredMembers"
+      @selected="doSelect" />
+    <ChatRoomRoomList
+      :rooms="rooms"
+    />
   </div>
 </template>
 
 <script>
 import firebase from 'firebase';
 import db from '@/firebaseInit';
+import ChatRoomFriendsList from './ChatRoomFriendsList';
+import ChatRoomRoomList from './ChatRoomRoomList';
 
 export default {
   name: 'ChatRoomCreator',
+  components: { ChatRoomRoomList, ChatRoomFriendsList },
   data() {
     return {
       roomName: '',

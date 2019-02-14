@@ -4,7 +4,6 @@
       <div class="c-app-name">Oyaji-Chat</div>
       <div class="c-login-control">
         <div v-if="uid" key="login">
-          {{ userName }}
           <button class="btn-login" type="button" @click="doLogout">ログアウト</button>
         </div>
         <div v-else key="logout">

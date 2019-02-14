@@ -1,9 +1,5 @@
 <template>
   <div>
-    <ChatRoomHeader :uid="user.uid"
-                    :userName="user.displayName"
-                    @login="doLogin"
-                    @logout="doLogout"/>
     <ChatRoomTimeline :chats="chat"/>
     <ChatRoomFooter :uid="user.uid"
                     @send="doSend"/>
@@ -14,13 +10,12 @@
 
 import firebase from 'firebase';
 import db from '@/firebaseInit';
-import ChatRoomHeader from '@/components/ChatRoomHeader';
 import ChatRoomFooter from '@/components/ChatRoomFooter';
 import ChatRoomTimeline from '@/components/ChatRoomTimeline';
 
 export default {
   name: 'ChatRoomView',
-  components: { ChatRoomTimeline, ChatRoomFooter, ChatRoomHeader },
+  components: { ChatRoomTimeline, ChatRoomFooter },
   data() {
     return {
       user: {},
@@ -35,37 +30,7 @@ export default {
 
         // isMyMessageはmessageとuser.displayNameかなんかと比較
         if (user) {
-          this.chat = [{
-            name: 'freitech',
-            image: 'image-sample',
-            message: 'hello',
-            isMyMessage: true,
-          },
-          {
-            name: 'other-user',
-            image: 'image-sample',
-            message: 'other-hello',
-            isMyMessage: false,
-          }];
-          // message変更時のハンドラを登録
-          db.collection('message')
-            .limit(10)
-            .get()
-            .then((snapshot) => {
-              snapshot.forEach((doc) => {
-                const row = doc.data();
-                this.chat.push({
-                  name: row.name,
-                  image: row.image,
-                  message: row.message,
-                  isMyMessage: row.name === user.displayName,
-                });
-              });
-            })
-            .catch((error) => {
-              console.error(error);
-            })
-            .on('child_added', this.childAdded);
+          this.$store.dispatch('fetchMessage');
         } else {
           // message変更時のハンドラを解除
           db.collection('message')
@@ -75,15 +40,6 @@ export default {
       });
   },
   methods: {
-    doLogin() {
-      const provider = new firebase.auth.TwitterAuthProvider();
-      firebase.auth()
-        .signInWithPopup(provider);
-    },
-    doLogout() {
-      firebase.auth()
-        .signOut();
-    },
     scrollBottom() {
       this.$nextTick(() => {
         window.scrollTo(0, document.body.clientHeight);
