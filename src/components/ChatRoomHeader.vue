@@ -2,34 +2,17 @@
   <header class="c-header">
     <div class="c-header-wrapper">
       <div class="c-app-name">Oyaji-Chat</div>
-      <div class="c-login-control">
-        <div v-if="!user" key="login">
-          <button class="btn-login" type="button" @click="doLogout">ログアウト</button>
-        </div>
-        <div v-else key="logout">
-          <button class="btn-logout" type="button" @click="doLogin">ログイン</button>
-        </div>
-      </div>
+      <ChatRoomMenu />
     </div>
   </header>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import ChatRoomMenu from '@/components/ChatRoomMenu';
 
 export default {
   name: 'ChatRoomHeader',
-  computed: mapState({
-    user: state => state.user,
-  }),
-  methods: {
-    doLogout() {
-      this.$emit('logout');
-    },
-    doLogin() {
-      this.$emit('login');
-    },
-  },
+  components: { ChatRoomMenu },
 };
 </script>
 
@@ -38,14 +21,18 @@ export default {
     color: white;
     display: flex;
     justify-content: space-between;
-    background-color: #ababab;
+    background-color: slateblue;
     padding: 20px;
-    height: 80px;
+    height: 10vh;
+    min-height: 75px;
     box-sizing: border-box;
   }
 
   .c-header-wrapper {
     width: 50%;
+    display: inline-flex;
+    line-height: 5vh;
+    min-height: 5vh;
     margin: 0 auto;
   }
 
@@ -54,23 +41,4 @@ export default {
     text-align: left;
   }
 
-  .c-login-control {
-    text-align: right;
-  }
-
-  .btn-login {
-    border: none;
-    background-color: #565656;
-    padding: 10px 20px;
-    border-radius: 15px;
-    color: #efefef;
-  }
-
-  .btn-logout {
-    border: none;
-    background-color: #565656;
-    padding: 10px 20px;
-    border-radius: 15px;
-    color: #efefef;
-  }
 </style>

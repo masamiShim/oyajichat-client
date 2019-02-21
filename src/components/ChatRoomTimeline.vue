@@ -1,6 +1,6 @@
 <template>
   <main class="c-chat-body">
-    <div v-for="item in chats" :key="item.key">
+    <div v-for="item in chats" :key="item.id">
       <div class="chat-wrapper">
         <div
           class="chat-message"
@@ -17,14 +17,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ChatRoomTimeline',
-  props: {
-    chats: {
-      type: Array,
-      required: true,
-    },
-  },
+  computed: mapState({
+    chats: state => state.messages,
+  }),
 };
 </script>
 
@@ -49,6 +48,7 @@ export default {
     padding: 10px 20px;
     text-align: left;
     border-radius: 20px;
+    word-wrap: break-word;
   }
 
   .my-chat {

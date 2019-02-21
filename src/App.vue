@@ -1,43 +1,23 @@
 <template>
   <div id="app">
-    <ChatRoomHeader @login="doLogin"
-                    @logout="doLogout"/>
-    <router-view/>
+    <ChatRoomHeader />
+    <LoginView v-if="isLogout" />
+    <router-view v-else />
   </div>
 </template>
 
 <script>
-import firebase from 'firebase';
-import { mapState } from 'vuex';
 import ChatRoomHeader from '@/components/ChatRoomHeader';
+import LoginView from '@/components/LoginView';
 
 
 export default {
   name: 'App',
-  components: { ChatRoomHeader },
-  computed: mapState({
-    user: state => state.user,
-  }),
-  methods: {
-    doLogin() {
-      const provider = new firebase.auth.TwitterAuthProvider();
-      firebase.auth()
-        .signInWithPopup(provider);
+  components: { LoginView, ChatRoomHeader },
+  computed: {
+    isLogout() {
+      return this.$store.getters.unAuthorized;
     },
-    doLogout() {
-      firebase.auth()
-        .signOut();
-    },
-  },
-  created() {
-    firebase.auth()
-      .onAuthStateChanged((_user) => {
-        if (!this.user) {
-          this.$store.dispatch('storeUser', _user);
-        } else {
-          this.$store.dispatch('removeUser');
-        }
-      });
   },
 };
 </script>

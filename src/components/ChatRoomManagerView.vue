@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ChatRoomList />
-    <ChatRoomFriendsList />
+    <ChatRoomList/>
+    <ChatRoomFriendsList/>
   </div>
 </template>
 

@@ -1,9 +1,10 @@
-export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export const AUTHORIZE_USER = 'AUTHORIZE_USER';
-export const ADD_ROOM = 'ADD_ROOM';
+export const CREATE_ROOM = 'CREATE_ROOM';
 export const FETCH_ROOMS = 'FETCH_ROOMS';
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const FETCH_MEMBERS = 'FETCH_MEMBERS';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const STORE_USER = 'STORE_USER';
 export const REMOVE_USER = 'REMOVE_USER';
+export const POST_IMAGE = 'POST_IMAGE';
+export const FETCH_IMAGE = 'FETCH_IMAGE';
