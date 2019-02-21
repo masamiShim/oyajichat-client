@@ -12,7 +12,6 @@ export default {
         const { image, userId } = row.data();
         return { id: row.id, src: image, userId };
       });
-
   },
   async register(image) {
     const docRef = await db.collection('images').add(image);

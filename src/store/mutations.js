@@ -19,7 +19,7 @@ export default {
   [types.STORE_USER](state, payload) {
     state.user = {
       uid: payload.uid,
-      displayName: payload.displayName
+      displayName: payload.displayName,
     };
   },
   [types.REMOVE_USER](state) {

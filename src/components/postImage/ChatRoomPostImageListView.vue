@@ -1,6 +1,9 @@
 <template>
   <div class="post-image-list-wrapper">
-    <ul class="post-image-list">
+    <div v-show="!images || images.length === 0">image投稿してね
+      <router-link to="/image/post">こちらから</router-link>
+    </div>
+    <ul v-if="images.length > 0"  class="post-image-list">
       <li v-for="image in images" :key="image.id" class="post-image-item">
         <img class="post-image-item__image" :src="image.src" />
       </li>
@@ -17,7 +20,9 @@ export default {
     images: state => state.images,
   }),
   created() {
-    this.$store.dispatch('fetchImages');
+    this.$nextTick(() => {
+      this.$store.dispatch('fetchImages');
+    });
   },
 };
 </script>

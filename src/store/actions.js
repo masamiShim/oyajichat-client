@@ -24,7 +24,7 @@ export default {
   },
   async sendMessage({ commit, state }, payload) {
     const message = await Message.register({ userId: state.user.uid, ...payload });
-    commit(types.SEND_MESSAGE, message);
+    commit(types.SEND_MESSAGE, { isMyMessage: true, ...message });
   },
   storeUser: ({ commit }, payload) => {
     commit(types.STORE_USER, payload);

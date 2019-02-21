@@ -1,9 +1,10 @@
 <template>
   <div class="c-login-control">
-    <div v-if="isSignOut" key="logout">
+    <div v-show="isSignOut" key="login">
+      <button class="btn-login" type="button" @click="doAnonymousLogin">匿名ログイン</button>
       <button class="btn-login" type="button" @click="doLogin">ログイン</button>
     </div>
-    <div v-else key="login">
+    <div v-show="!isSignOut" key="logout">
       <button class="btn-logout" type="button" @click="doLogout">ログアウト</button>
     </div>
   </div>
@@ -20,6 +21,9 @@ export default {
       const provider = new firebase.auth.TwitterAuthProvider();
       firebase.auth()
         .signInWithPopup(provider);
+    },
+    doAnonymousLogin() {
+      firebase.auth().signInAnonymously();
     },
     doLogout() {
       firebase.auth().signOut();
@@ -41,7 +45,8 @@ export default {
           if (Object.keys(u).length < 1) {
             this.$store.dispatch('removeUser');
           } else if (Object.keys(this.user).length < 1) {
-            const { uid, displayName } = u;
+            const uid = u.uid;
+            const displayName = u.displayName || 'anonymous';
             this.$store.dispatch('storeUser', { uid, displayName });
           }
         });

@@ -64,7 +64,6 @@ export default {
       this.$store.dispatch('createRoom', this.roomName)
         .then((room) => {
           const { id } = room;
-          console.log(this);
           this.$router.push(`/room/${id}`);
         }).catch((err) => {
           this.error = true;

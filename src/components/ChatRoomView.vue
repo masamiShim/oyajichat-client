@@ -42,6 +42,11 @@ export default {
   },
   mounted() {
     this.roomId = this.$route.params.roomId;
+    if (!this.roomId) {
+      // FIXME: 多分router周りの設定でやるのが正しいけど。。。
+      this.$router.push('room/list');
+      return;
+    }
     this.$store.dispatch('fetchMessage', { roomId: this.roomId });
     this.scrollBottom();
   },
